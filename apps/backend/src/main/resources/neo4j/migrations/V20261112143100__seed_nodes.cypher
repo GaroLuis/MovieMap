@@ -1,0 +1,27 @@
+CREATE (scifi:Genre {id: 'a1000000-0000-4000-8000-000000000001', name: 'Science Fiction'});
+CREATE (drama:Genre {id: 'a1000000-0000-4000-8000-000000000002', name: 'Drama'});
+CREATE (thriller:Genre {id: 'a1000000-0000-4000-8000-000000000003', name: 'Thriller'});
+
+CREATE (nolan:Person {id: 'b1000000-0000-4000-8000-000000000001', name: 'Christopher Nolan'});
+CREATE (dicaprio:Person {id: 'b1000000-0000-4000-8000-000000000002', name: 'Leonardo DiCaprio'});
+CREATE (mcconaughey:Person {id: 'b1000000-0000-4000-8000-000000000003', name: 'Matthew McConaughey'});
+CREATE (bale:Person {id: 'b1000000-0000-4000-8000-000000000004', name: 'Christian Bale'});
+
+CREATE (inception:Movie {id: 'c1000000-0000-4000-8000-000000000001', title: 'Inception', rating: 'PG-13', releaseDate: date('2010-07-16')});
+CREATE (interstellar:Movie {id: 'c1000000-0000-4000-8000-000000000002', title: 'Interstellar', rating: 'PG-13', releaseDate: date('2014-11-07')});
+CREATE (darkKnight:Movie {id: 'c1000000-0000-4000-8000-000000000003', title: 'The Dark Knight', rating: 'PG-13', releaseDate: date('2008-07-18')});
+
+MATCH (m:Movie {id: 'c1000000-0000-4000-8000-000000000001'}), (g:Genre {id: 'a1000000-0000-4000-8000-000000000001'}) CREATE (m)-[:HAS_GENRE]->(g);
+MATCH (m:Movie {id: 'c1000000-0000-4000-8000-000000000001'}), (g:Genre {id: 'a1000000-0000-4000-8000-000000000003'}) CREATE (m)-[:HAS_GENRE]->(g);
+MATCH (m:Movie {id: 'c1000000-0000-4000-8000-000000000002'}), (g:Genre {id: 'a1000000-0000-4000-8000-000000000001'}) CREATE (m)-[:HAS_GENRE]->(g);
+MATCH (m:Movie {id: 'c1000000-0000-4000-8000-000000000002'}), (g:Genre {id: 'a1000000-0000-4000-8000-000000000002'}) CREATE (m)-[:HAS_GENRE]->(g);
+MATCH (m:Movie {id: 'c1000000-0000-4000-8000-000000000003'}), (g:Genre {id: 'a1000000-0000-4000-8000-000000000003'}) CREATE (m)-[:HAS_GENRE]->(g);
+MATCH (m:Movie {id: 'c1000000-0000-4000-8000-000000000003'}), (g:Genre {id: 'a1000000-0000-4000-8000-000000000002'}) CREATE (m)-[:HAS_GENRE]->(g);
+
+MATCH (p:Person {id: 'b1000000-0000-4000-8000-000000000001'}), (m:Movie {id: 'c1000000-0000-4000-8000-000000000001'}) CREATE (p)-[:DIRECTED]->(m);
+MATCH (p:Person {id: 'b1000000-0000-4000-8000-000000000001'}), (m:Movie {id: 'c1000000-0000-4000-8000-000000000002'}) CREATE (p)-[:DIRECTED]->(m);
+MATCH (p:Person {id: 'b1000000-0000-4000-8000-000000000001'}), (m:Movie {id: 'c1000000-0000-4000-8000-000000000003'}) CREATE (p)-[:DIRECTED]->(m);
+
+MATCH (p:Person {id: 'b1000000-0000-4000-8000-000000000002'}), (m:Movie {id: 'c1000000-0000-4000-8000-000000000001'}) CREATE (p)-[:ACTED_IN]->(m);
+MATCH (p:Person {id: 'b1000000-0000-4000-8000-000000000003'}), (m:Movie {id: 'c1000000-0000-4000-8000-000000000002'}) CREATE (p)-[:ACTED_IN]->(m);
+MATCH (p:Person {id: 'b1000000-0000-4000-8000-000000000004'}), (m:Movie {id: 'c1000000-0000-4000-8000-000000000003'}) CREATE (p)-[:ACTED_IN]->(m);

@@ -6,19 +6,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public record MovieResponse(
-        String id,
+        int id,
         String title,
-        String rating,
+        float rating,
         LocalDate releaseDate,
         Set<Genre> genres,
         Set<Person> cast,
         Set<Person> directors
 ) {
 
-    public record Genre(String id, String name) {
+    public record Genre(int id, String name) {
     }
 
-    public record Person(String id, String name) {
+    public record Person(int id, String name) {
     }
 
     public static MovieResponse from(Movie movie) {
